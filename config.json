@@ -1,0 +1,7 @@
+{
+    "excel_path": "tu_excel.xlsm",
+    "db_url":"mysql+pymysql://tu_usuario:tu_contraseña.@localhost:3306/gestion" ,
+    "table_name": "nombre_de_la_tabla_objetivo",
+    "sheet_name": "nombre_de_la_hoja_objetivo",
+    "primary_key": "tu_llave_primaria"
+}

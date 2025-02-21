@@ -1,5 +1,0 @@
-pandas==2.0.3
-SQLAlchemy==2.0.20
-mysql-connector-python==8.0.33
-Flask==2.3.2
-Flask-Cors==3.0.10

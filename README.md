@@ -1,4 +1,3 @@
-# Sistema-de-gestion-de-ventas
 # Introducción:
 Este proyecto tiene como objetivo crear un sistema de gestión de ventas con proyecciones de ventas con front-end web con soporte offline y para la nube.
 

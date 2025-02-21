@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #0056b3;
+    margin: 0;
+}
+
+#searchBox {
+padding: 10px 40px 10px 10px;
+width: 100%;
+max-width: 300px;
+border: 2px solid #0056b3;
+border-radius: 5px;
+outline: none;
+background: url('search-icon.svg') no-repeat right 10px center;
+background-size: 20px;
+transition: box-shadow 0.3s ease-in-out;
+}
+
+#searchBox:focus {
+box-shadow: 0 0 10px rgba(0, 86, 179, 0.7);
+}
+
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+#loadMore {
+padding: 10px 20px;
+background-color: #0056b3;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+font-size: 16px;
+transition: background-color 0.3s ease-in-out;
+margin: 20px auto;
+}
+
+#loadMore:hover {
+background-color: #003d80;
+}
+
+#loadMore::after {
+content: '\21bb'; /* Símbolo de actualización */
+font-size: 18px;
+}
+
+#dataTable {
+width: 100%;
+border-collapse: collapse;
+background: white;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+border-radius: 5px;
+overflow: hidden;
+}
+
+th {
+    background-color: #0056b3;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #e6f2ff;
+}

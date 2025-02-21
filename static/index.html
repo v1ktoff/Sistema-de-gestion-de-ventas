@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Datos desde MariaDB</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Cátalago de productos</h1>
+        <input type="text" id="searchBox" placeholder="Buscar por código...">
+    </header>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>CLAVE</th>
+                <th>MARCA</th>
+                <th>DESCRIPCIÓN</th>
+                <th>PRECIO DE LISTA</th>
+                <th>DESCUENTO</th>
+                <th>PRECIO FINAL</th>
+                <th>+10%</th>
+                <th>+20%</th>
+                <th>+30%</th>
+                <th>+40%</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas se generarán dinámicamente con JavaScript -->
+        </tbody>
+    </table>
+    <button id="loadMore">Cargar más</button>
+
+    <script>
+        let offset = 0;
+        const limit = 50;
+        let searchTerm = '';
+
+        async function loadMore() {
+            const button = document.getElementById('loadMore');
+            button.disabled = true;
+
+            try {
+                const response = await fetch(`http://localhost:3000/datos?offset=${offset}&search=${encodeURIComponent(searchTerm)}`);
+                const data = await response.json();
+
+                if (data.length > 0) {
+                    renderTable(data);
+                    offset += limit;
+                    button.disabled = false;
+                } else {
+                    button.disabled = true;
+                    button.textContent = 'No hay más resultados';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                button.disabled = false;
+            }
+        }
+
+        function renderTable(data) {
+            const tableBody = document.querySelector('#dataTable tbody');
+            tableBody.innerHTML = '';
+            data.forEach(row => {
+                const precioLista = parseFloat(row['PRECIO DE LISTA']) || 0;
+                const descuento = row.DESCUENTO*100;
+                const precioFinal = precioLista - (precioLista * (descuento/100));
+                const margen10 = precioLista * 1.10;
+                const margen20 = precioLista * 1.20;
+                const margen30 = precioLista * 1.30;
+                const margen40 = precioLista * 1.40;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.CÓDIGO || '-'}</td>
+                    <td>${row.CLAVE || '-'}</td>
+                    <td>${row.MARCA || '-'}</td>
+                    <td>${row.DESCRIPCIÓN || '-'}</td>
+                    <td>${precioLista.toFixed(2)}</td>
+                    <td>${descuento.toFixed(2)}%</td>
+                    <td>${precioFinal.toFixed(2)}</td>
+                    <td>${margen10.toFixed(2)}</td>
+                    <td>${margen20.toFixed(2)}</td>
+                    <td>${margen30.toFixed(2)}</td>
+                    <td>${margen40.toFixed(2)}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        document.getElementById('searchBox').addEventListener('input', function() {
+            searchTerm = this.value.toLowerCase();
+            offset = 0;
+            loadMore();
+        });
+
+        window.onload = loadMore;
+        document.getElementById('loadMore').addEventListener('click', loadMore);
+    </script>
+</body>
+</html>

@@ -2,10 +2,10 @@
 
 # Configuración de la base de datos
 DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'Elotedemaiz1.',
-    'database': 'gestion',
+    'host': 'host',
+    'user': 'tu_usuario',
+    'password': 'tu_contraseña',
+    'database': 'base_de_datos_objetivo',
 }
 
 # Configuración del servidor
